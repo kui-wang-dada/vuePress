@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>React-Native 基本原理 | 哒哒的博客</title>
+    <meta name="description" content="哒哒练习写文章做记录的地方">
+    <link rel="icon" href="/blog/img/logo.png">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.1846c831.css" as="style"><link rel="preload" href="/blog/assets/js/app.0d710046.js" as="script"><link rel="preload" href="/blog/assets/js/2.3724615d.js" as="script"><link rel="preload" href="/blog/assets/js/3.e00b5bcc.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.b61dd10e.js"><link rel="prefetch" href="/blog/assets/js/11.e5fbb993.js"><link rel="prefetch" href="/blog/assets/js/12.6072f3fe.js"><link rel="prefetch" href="/blog/assets/js/13.119ec9f1.js"><link rel="prefetch" href="/blog/assets/js/14.50793965.js"><link rel="prefetch" href="/blog/assets/js/15.6b54485c.js"><link rel="prefetch" href="/blog/assets/js/16.31f68c05.js"><link rel="prefetch" href="/blog/assets/js/17.4e4585ba.js"><link rel="prefetch" href="/blog/assets/js/18.68501181.js"><link rel="prefetch" href="/blog/assets/js/19.0e5b6c69.js"><link rel="prefetch" href="/blog/assets/js/20.d751fd77.js"><link rel="prefetch" href="/blog/assets/js/21.61020ecb.js"><link rel="prefetch" href="/blog/assets/js/22.6843e775.js"><link rel="prefetch" href="/blog/assets/js/23.c4fe93cf.js"><link rel="prefetch" href="/blog/assets/js/24.92a8097d.js"><link rel="prefetch" href="/blog/assets/js/25.a3f181ca.js"><link rel="prefetch" href="/blog/assets/js/26.244f0e68.js"><link rel="prefetch" href="/blog/assets/js/27.87040a01.js"><link rel="prefetch" href="/blog/assets/js/28.1ce7f872.js"><link rel="prefetch" href="/blog/assets/js/29.a62422be.js"><link rel="prefetch" href="/blog/assets/js/4.15bd42cb.js"><link rel="prefetch" href="/blog/assets/js/5.37f72eb9.js"><link rel="prefetch" href="/blog/assets/js/6.f95e396f.js"><link rel="prefetch" href="/blog/assets/js/7.3e10e91f.js"><link rel="prefetch" href="/blog/assets/js/8.853705b0.js"><link rel="prefetch" href="/blog/assets/js/9.39b50577.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.1846c831.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">哒哒的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">JavaScript</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/JS/object.html" class="nav-link">JS之面向对象程序设计和继承</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/base.html" class="nav-link">JS基础知识总结</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/copy.html" class="nav-link">JS深浅拷贝</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/design.html" class="nav-link">JS设计模式</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/this.html" class="nav-link">JS之this指向</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/ifelse.html" class="nav-link">JS条件语句</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/simple.html" class="nav-link">JS之代码简洁之道</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">ReactNative</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/ReactNative/summary.html" class="nav-link router-link-exact-active router-link-active">ReactNative技术栈总结</a></li><li class="dropdown-item"><!----> <a href="/blog/ReactNative/record.html" class="nav-link">ReactNative知识点记录</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Vue</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/Vue/base.html" class="nav-link">vue基础知识</a></li><li class="dropdown-item"><!----> <a href="/blog/Vue/vuex.html" class="nav-link">vuex基础</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">混合开发</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/hybird/cordova.html" class="nav-link">cordova基础</a></li><li class="dropdown-item"><!----> <a href="/blog/hybird/vueCordova.html" class="nav-link">vue+cordova思考</a></li><li class="dropdown-item"><!----> <a href="/blog/hybird/uniapp.html" class="nav-link">小程序多端框架研究</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Node</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/Node/koa2.html" class="nav-link">koa2+sequelize初探</a></li><li class="dropdown-item"><!----> <a href="/blog/Node/fullStack.html" class="nav-link">全栈工程思考</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">网络</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/http/base.html" class="nav-link">http协议总结</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">构建</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/goujian/webpack.html" class="nav-link">webpack学习</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">JavaScript</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/JS/object.html" class="nav-link">JS之面向对象程序设计和继承</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/base.html" class="nav-link">JS基础知识总结</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/copy.html" class="nav-link">JS深浅拷贝</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/design.html" class="nav-link">JS设计模式</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/this.html" class="nav-link">JS之this指向</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/ifelse.html" class="nav-link">JS条件语句</a></li><li class="dropdown-item"><!----> <a href="/blog/JS/simple.html" class="nav-link">JS之代码简洁之道</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">ReactNative</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/ReactNative/summary.html" class="nav-link router-link-exact-active router-link-active">ReactNative技术栈总结</a></li><li class="dropdown-item"><!----> <a href="/blog/ReactNative/record.html" class="nav-link">ReactNative知识点记录</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Vue</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/Vue/base.html" class="nav-link">vue基础知识</a></li><li class="dropdown-item"><!----> <a href="/blog/Vue/vuex.html" class="nav-link">vuex基础</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">混合开发</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/hybird/cordova.html" class="nav-link">cordova基础</a></li><li class="dropdown-item"><!----> <a href="/blog/hybird/vueCordova.html" class="nav-link">vue+cordova思考</a></li><li class="dropdown-item"><!----> <a href="/blog/hybird/uniapp.html" class="nav-link">小程序多端框架研究</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Node</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/Node/koa2.html" class="nav-link">koa2+sequelize初探</a></li><li class="dropdown-item"><!----> <a href="/blog/Node/fullStack.html" class="nav-link">全栈工程思考</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">网络</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/http/base.html" class="nav-link">http协议总结</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">构建</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/blog/goujian/webpack.html" class="nav-link">webpack学习</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>React-Native 基本原理</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/ReactNative/summary.html#react-native-基本原理" class="sidebar-link">React-Native 基本原理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/ReactNative/summary.html#_1-整体架构" class="sidebar-link">1. 整体架构</a></li><li class="sidebar-sub-header"><a href="/blog/ReactNative/summary.html#_2-组件代码" class="sidebar-link">2. 组件代码</a></li></ul></li><li><a href="/blog/ReactNative/summary.html#四小强之路由的设计封装" class="sidebar-link">四小强之路由的设计封装</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/ReactNative/summary.html#_1、简单的路由页面配置" class="sidebar-link">1、简单的路由页面配置</a></li><li class="sidebar-sub-header"><a href="/blog/ReactNative/summary.html#_2、利用-react-navigation-对配置文件进行封装" class="sidebar-link">2、利用 react-navigation 对配置文件进行封装</a></li></ul></li><li><a href="/blog/ReactNative/summary.html#四小强之-axios-的封装结合" class="sidebar-link">四小强之 axios 的封装结合</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/ReactNative/summary.html#_1、封装页面和-axios-调用的类" class="sidebar-link">1、封装页面和 axios 调用的类</a></li><li class="sidebar-sub-header"><a href="/blog/ReactNative/summary.html#_2、-使用-axios-接口拦截器" class="sidebar-link">2、 使用 axios 接口拦截器</a></li><li class="sidebar-sub-header"><a href="/blog/ReactNative/summary.html#_3、-接口通过一下方式配置" class="sidebar-link">3、 接口通过一下方式配置</a></li></ul></li><li><a href="/blog/ReactNative/summary.html#四小强之-redux-的封装" class="sidebar-link">四小强之 redux 的封装</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/ReactNative/summary.html#_1、reducer-的配置" class="sidebar-link">1、reducer 的配置</a></li><li class="sidebar-sub-header"><a href="/blog/ReactNative/summary.html#_2、actions-的配置" class="sidebar-link">2、actions 的配置</a></li></ul></li><li><a href="/blog/ReactNative/summary.html#四小强之公共方法的封装" class="sidebar-link">四小强之公共方法的封装</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="react-native-基本原理"><a href="#react-native-基本原理" aria-hidden="true" class="header-anchor">#</a> React-Native 基本原理</h2> <h3 id="_1-整体架构"><a href="#_1-整体架构" aria-hidden="true" class="header-anchor">#</a> 1. 整体架构</h3> <p>RN 框架让 js 开发者可以大部分使用 js 代码构建跨平台 APP，Facebook 官方说法是 learn once, run everywhere， 即在 Android 、 IOS、 Browser 各个平台，程序画 UI 和写逻辑的方式都大致相同。因为 JS 可以动态加载，从而理论上可以做到 write once, run everywhere， 当然要做额外的适配处理。如图：</p> <p><img src="/blog/assets/img/1.e8e76317.jpg" alt="1.jpeg"></p> <p>RN 需要一个 js 的运行环境，在 ios 上直接使用内置的 javascriptcore，在 android 上使用 webkit.org 官方开源的 jsc.so。此外还集成了其他开源组件，如 fresco 图片组件，okhttp 网络组件等。</p> <p>RN 会把应用的 js 代码（包括依赖的 framework）编译成一个 js 文件（一般命名为 index.android.bundle）。RN 的整体框架目标就是为了解释运行这个 js 脚本文件，如果是 js 扩展的 api，则直接通过 bridge 调用 native 方法；如果是 ui 界面，则映射到 virtual Dom 这个虚拟的 js 数据结构中，通过 bridge 传递到 native，然后根据数据属性设置各个对应的真实 native 的 view。bridge 是一种 js 和 java 代码通信的机制，用 bridge 函数传入对方 module 和 method 即可达到异步回调的结果。</p> <p>对于 js 开发者来说，画 ui 只画到 virtual DOM 中，不需要特别关心具体的平台，还是原来的单线程开发，还是原来的 html 组装 ui（jsx），还是原来的样式模型（部分兼容）。RN 的界面处理除了实现 View 增删改查的接口之外，还自定义一套样式表达 CSSLayout，这套 CSSLayout 也是跨平台实现。RN 拥有画 ui 的跨平台能力，主要是加入了 virtual DOM 编程模型，该方法一面可以照顾 js 开发者在 htmlDOM 的部分传承，另一方面可以让 virtualDOM 适配实现到各个平台，实现跨平台的能力，并且为未来增加更多的想象空间，比如 react-cavas,react-openGL。而实际上 react-native 也是从 reactjs 演变而来</p> <p><img src="/blog/assets/img/2.83fbe4fa.jpg" alt="2.jpg"></p> <h3 id="_2-组件代码"><a href="#_2-组件代码" aria-hidden="true" class="header-anchor">#</a> 2. 组件代码</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;react&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> View<span class="token punctuation">,</span> Text<span class="token punctuation">,</span> StyleSheet<span class="token punctuation">,</span> ActivityIndicator <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;react-native&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">static</span> defaultProps <span class="token operator">=</span> <span class="token punctuation">{</span>
+    title<span class="token punctuation">:</span> <span class="token string">&quot;处理中...&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> <span class="token punctuation">{</span> title <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>View
+        style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+          padding<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+          backgroundColor<span class="token punctuation">:</span> <span class="token string">&quot;rgba(0, 0, 0, 0.7)&quot;</span><span class="token punctuation">,</span>
+          borderRadius<span class="token punctuation">:</span> <span class="token number">10</span>
+        <span class="token punctuation">}</span><span class="token punctuation">}</span>
+      <span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>ActivityIndicator animating<span class="token operator">=</span><span class="token punctuation">{</span><span class="token boolean">true</span><span class="token punctuation">}</span> size<span class="token operator">=</span><span class="token string">&quot;large&quot;</span> color<span class="token operator">=</span><span class="token string">&quot;#fff&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> color<span class="token punctuation">:</span> <span class="token string">&quot;#fff&quot;</span><span class="token punctuation">,</span> marginTop<span class="token punctuation">:</span> <span class="token number">10</span> <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">{</span>title<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function-variable function">componentDidMount</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> style <span class="token operator">=</span> StyleSheet<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>对于 js 开发者来说，整个 RN APP 就只有一个 js 文件，而开发者需要编写的就只有如上部分。主要是四个部分：</p> <ol><li><p>import 所有依赖的组件</p></li> <li><p>class Main extends Component 创建 app，并且在 reader 函数中返回 ui 界面结构，实际经过编译，都会变成 js 代码。</p></li> <li><p>const style = StyleSheet.create({}) 创建 css 样式，实际上会直接当作参数反馈到上面的 app</p></li> <li><p>AppRegistry.registerComponent('AwesomeProject', () =&gt; AwesomeProject); 以上三个更像是参数，这个才是 JS 程序的入口。即把当前 APP 的对象注册到 AppRegistry 组件中， AppRegistry 组件是 js module</p></li></ol> <p>接着就等待 Native 事件驱动渲染 JS 端定义的 APP 组件</p> <h2 id="四小强之路由的设计封装"><a href="#四小强之路由的设计封装" aria-hidden="true" class="header-anchor">#</a> 四小强之路由的设计封装</h2> <p><img src="/blog/assets/img/3.4c331ca3.png" alt="3.png"></p> <h3 id="_1、简单的路由页面配置"><a href="#_1、简单的路由页面配置" aria-hidden="true" class="header-anchor">#</a> 1、简单的路由页面配置</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> Home <span class="token keyword">from</span> <span class="token string">&quot;home/Home&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> NewList <span class="token keyword">from</span> <span class="token string">&quot;home/NewList&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Product <span class="token keyword">from</span> <span class="token string">&quot;home/Product&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> NewDetail <span class="token keyword">from</span> <span class="token string">&quot;home/NewDetail&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Icon <span class="token keyword">from</span> <span class="token string">&quot;react-native-vector-icons/FontAwesome&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> HomeRoute <span class="token operator">=</span> <span class="token punctuation">{</span>
+  home<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    screen<span class="token punctuation">:</span> Home<span class="token punctuation">,</span>
+    navigationOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      header<span class="token punctuation">:</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> HomeRoute<span class="token punctuation">;</span>
+</code></pre></div><h3 id="_2、利用-react-navigation-对配置文件进行封装"><a href="#_2、利用-react-navigation-对配置文件进行封装" aria-hidden="true" class="header-anchor">#</a> 2、利用 react-navigation 对配置文件进行封装</h3> <h5 id="tabbar-的封装"><a href="#tabbar-的封装" aria-hidden="true" class="header-anchor">#</a> - tabbar 的封装</h5> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">/** @format */</span>
+
+<span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;react&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  createBottomTabNavigator<span class="token punctuation">,</span>
+  createStackNavigator<span class="token punctuation">,</span>
+  createAppContainer<span class="token punctuation">,</span>
+  getActiveChildNavigationOptions
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;react-navigation&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Icon<span class="token punctuation">,</span> Touchable<span class="token punctuation">,</span> Button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;ui&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> StyleSheet<span class="token punctuation">,</span> Platform<span class="token punctuation">,</span> View <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;react-native&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> transformSize <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@/utils&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> lang <span class="token keyword">from</span> <span class="token string">&quot;@/assets/lang&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> home <span class="token keyword">from</span> <span class="token string">&quot;./home&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> service <span class="token keyword">from</span> <span class="token string">&quot;./service&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> my <span class="token keyword">from</span> <span class="token string">&quot;./my&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> common <span class="token keyword">from</span> <span class="token string">&quot;./public&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> login <span class="token keyword">from</span> <span class="token string">&quot;./login&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> tabNavRouteConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  home<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    screen<span class="token punctuation">:</span> home<span class="token punctuation">.</span>home<span class="token punctuation">.</span>screen<span class="token punctuation">,</span>
+    <span class="token function-variable function">navigationOptions</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> screenProps <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+      tabBarLabel<span class="token punctuation">:</span> screenProps<span class="token punctuation">.</span>tabLabel<span class="token punctuation">.</span>home<span class="token punctuation">,</span>
+      <span class="token function-variable function">tabBarIcon</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> tintColor<span class="token punctuation">,</span> focused <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>Icon name<span class="token operator">=</span><span class="token punctuation">{</span>focused <span class="token operator">?</span> <span class="token string">&quot;home2&quot;</span> <span class="token punctuation">:</span> <span class="token string">&quot;home1&quot;</span><span class="token punctuation">}</span> size<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">25</span><span class="token punctuation">}</span> color<span class="token operator">=</span><span class="token punctuation">{</span>tintColor<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      header<span class="token punctuation">:</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  service<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    screen<span class="token punctuation">:</span> service<span class="token punctuation">.</span>service<span class="token punctuation">.</span>screen<span class="token punctuation">,</span>
+    <span class="token function-variable function">navigationOptions</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> screenProps <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+      tabBarLabel<span class="token punctuation">:</span> screenProps<span class="token punctuation">.</span>tabLabel<span class="token punctuation">.</span>service<span class="token punctuation">,</span>
+      <span class="token function-variable function">tabBarIcon</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> tintColor<span class="token punctuation">,</span> focused <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>Icon
+          name<span class="token operator">=</span><span class="token punctuation">{</span>focused <span class="token operator">?</span> <span class="token string">&quot;service2&quot;</span> <span class="token punctuation">:</span> <span class="token string">&quot;service1&quot;</span><span class="token punctuation">}</span>
+          size<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">25</span><span class="token punctuation">}</span>
+          color<span class="token operator">=</span><span class="token punctuation">{</span>tintColor<span class="token punctuation">}</span>
+        <span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  my<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    screen<span class="token punctuation">:</span> my<span class="token punctuation">.</span>my<span class="token punctuation">.</span>screen<span class="token punctuation">,</span>
+    <span class="token function-variable function">navigationOptions</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> screenProps <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+      tabBarLabel<span class="token punctuation">:</span> screenProps<span class="token punctuation">.</span>tabLabel<span class="token punctuation">.</span>my<span class="token punctuation">,</span>
+      <span class="token function-variable function">tabBarIcon</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> tintColor<span class="token punctuation">,</span> focused <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>Icon name<span class="token operator">=</span><span class="token punctuation">{</span>focused <span class="token operator">?</span> <span class="token string">&quot;wode2&quot;</span> <span class="token punctuation">:</span> <span class="token string">&quot;wode1&quot;</span><span class="token punctuation">}</span> size<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">25</span><span class="token punctuation">}</span> color<span class="token operator">=</span><span class="token punctuation">{</span>tintColor<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> TabNav <span class="token operator">=</span> <span class="token function">createBottomTabNavigator</span><span class="token punctuation">(</span>tabNavRouteConfig<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  animationEnabled<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  swipeEnabled<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  lazy<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  tabBarPosition<span class="token punctuation">:</span> <span class="token string">&quot;bottom&quot;</span><span class="token punctuation">,</span>
+  tabBarOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    showIcon<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    activeTintColor<span class="token punctuation">:</span> <span class="token string">&quot;#3fc375&quot;</span><span class="token punctuation">,</span>
+    inactiveTintColor<span class="token punctuation">:</span> <span class="token string">&quot;#494949&quot;</span><span class="token punctuation">,</span>
+    labelStyle<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontSize<span class="token punctuation">:</span> <span class="token number">12</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    style<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      height<span class="token punctuation">:</span> <span class="token function">transformSize</span><span class="token punctuation">(</span><span class="token number">110</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+TabNav<span class="token punctuation">.</span><span class="token function-variable function">navigationOptions</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> navigation<span class="token punctuation">,</span> screenProps <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">getActiveChildNavigationOptions</span><span class="token punctuation">(</span>navigation<span class="token punctuation">,</span> screenProps<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h5 id="整体路由的封装"><a href="#整体路由的封装" aria-hidden="true" class="header-anchor">#</a> - 整体路由的封装</h5> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// const AppContainer = createAppContainer(TabNav);</span>
+<span class="token keyword">const</span> AppNavigator <span class="token operator">=</span> <span class="token function">createStackNavigator</span><span class="token punctuation">(</span>
+  <span class="token punctuation">{</span>
+    App<span class="token punctuation">:</span> TabNav<span class="token punctuation">,</span>
+    <span class="token operator">...</span>home<span class="token punctuation">,</span>
+    <span class="token operator">...</span>service<span class="token punctuation">,</span>
+    <span class="token operator">...</span>my<span class="token punctuation">,</span>
+    <span class="token operator">...</span>common<span class="token punctuation">,</span>
+    <span class="token operator">...</span>login
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token function-variable function">defaultNavigationOptions</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> navigation <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">StackOptions</span><span class="token punctuation">(</span><span class="token punctuation">{</span> navigation <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    cardShadowEnabled<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    cardOverlayEnabled<span class="token punctuation">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> AppContainer <span class="token operator">=</span> <span class="token function">createAppContainer</span><span class="token punctuation">(</span>AppNavigator<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> AppContainer<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">StackOptions</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> navigation <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> tabBarVisible <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> headerBackTitle <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> headerStyle <span class="token operator">=</span> <span class="token punctuation">{</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">&quot;#fff&quot;</span><span class="token punctuation">,</span>
+    borderBottomWidth<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    borderBottomColor<span class="token punctuation">:</span> <span class="token string">&quot;#edebed&quot;</span><span class="token punctuation">,</span>
+    elevation<span class="token punctuation">:</span> <span class="token number">0</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> headerTitleStyle <span class="token operator">=</span> <span class="token punctuation">{</span>
+    flex<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    textAlign<span class="token punctuation">:</span> <span class="token string">&quot;center&quot;</span><span class="token punctuation">,</span>
+    fontWeight<span class="token punctuation">:</span> <span class="token string">&quot;600&quot;</span><span class="token punctuation">,</span>
+    color<span class="token punctuation">:</span> <span class="token string">&quot;#333&quot;</span><span class="token punctuation">,</span>
+    fontSize<span class="token punctuation">:</span> <span class="token function">transformSize</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> headerTintColor <span class="token operator">=</span> <span class="token string">&quot;#3fc375&quot;</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> headerLeft <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>Button
+      style<span class="token operator">=</span><span class="token punctuation">{</span>s<span class="token punctuation">.</span>backButton<span class="token punctuation">}</span>
+      onPress<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        navigation<span class="token punctuation">.</span><span class="token function">goBack</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">}</span>
+      icon<span class="token operator">=</span><span class="token string">&quot;back&quot;</span>
+      iconSize<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">20</span><span class="token punctuation">}</span>
+      iconColor<span class="token operator">=</span><span class="token string">&quot;#666&quot;</span>
+      title<span class="token operator">=</span><span class="token punctuation">{</span>lang<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">&quot;common.back&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+      textStyle<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+        color<span class="token punctuation">:</span> <span class="token string">&quot;#666&quot;</span><span class="token punctuation">,</span>
+        marginLeft<span class="token punctuation">:</span> <span class="token function">transformSize</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        fontSize<span class="token punctuation">:</span> <span class="token function">transformSize</span><span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> headerRight <span class="token operator">=</span> <span class="token operator">&lt;</span>View style<span class="token operator">=</span><span class="token punctuation">{</span>s<span class="token punctuation">.</span>rightView<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    tabBarVisible<span class="token punctuation">,</span>
+    headerBackTitle<span class="token punctuation">,</span>
+    headerStyle<span class="token punctuation">,</span>
+    headerTitleStyle<span class="token punctuation">,</span>
+    headerTintColor<span class="token punctuation">,</span>
+    headerLeft<span class="token punctuation">,</span>
+    headerRight
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="四小强之-axios-的封装结合"><a href="#四小强之-axios-的封装结合" aria-hidden="true" class="header-anchor">#</a> 四小强之 axios 的封装结合</h2> <p><img src="/blog/assets/img/4.a7630100.png" alt="4.png"></p> <h3 id="_1、封装页面和-axios-调用的类"><a href="#_1、封装页面和-axios-调用的类" aria-hidden="true" class="header-anchor">#</a> 1、封装页面和 axios 调用的类</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">/** @format */</span>
+
+<span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">&quot;./axios&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Qs <span class="token keyword">from</span> <span class="token string">&quot;qs&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> _pick <span class="token keyword">from</span> <span class="token string">&quot;lodash/pick&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> _assign <span class="token keyword">from</span> <span class="token string">&quot;lodash/assign&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> _merge <span class="token keyword">from</span> <span class="token string">&quot;lodash/merge&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> _isEmpty <span class="token keyword">from</span> <span class="token string">&quot;lodash/isEmpty&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> _isArray <span class="token keyword">from</span> <span class="token string">&quot;lodash/isArray&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> assert <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@/utils&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">API_DEFAULT_CONFIG</span><span class="token punctuation">,</span> <span class="token constant">AXIOS_DEFAULT_CONFIG</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@/config&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token constant">API_CONFIG</span> <span class="token keyword">from</span> <span class="token string">&quot;@/api&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 生成api接口类
+ */</span>
+<span class="token keyword">class</span> <span class="token class-name">Api</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>api <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">apiBuilder</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/**
+   * 创建工程接口
+   * @param sep 分隔符
+   * @param config 接口配置对象
+   * @param mock 是否开启mock
+   * @param debug 是否开启debug模式
+   * @param mockBaseURL mock接口地址
+   */</span>
+  <span class="token function">apiBuilder</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    sep <span class="token operator">=</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">,</span>
+    config <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    mock <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    debug <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    mockBaseURL <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">namespace</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_apiSingleBuilder</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        namespace<span class="token punctuation">,</span>
+        mock<span class="token punctuation">,</span>
+        mockBaseURL<span class="token punctuation">,</span>
+        sep<span class="token punctuation">,</span>
+        debug<span class="token punctuation">,</span>
+        config<span class="token punctuation">:</span> config<span class="token punctuation">[</span>namespace<span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/**
+   * 创建单个接口
+   * @param sep 分隔符
+   * @param config 接口配置对象
+   * @param mock 是否开启mock
+   * @param debug 是否开启debug模式
+   * @param mockBaseURL mock接口地址
+   */</span>
+  <span class="token function">_apiSingleBuilder</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    namespace<span class="token punctuation">,</span>
+    sep <span class="token operator">=</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">,</span>
+    config <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    mock <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    debug <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    mockBaseURL <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    config<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">api</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> <span class="token punctuation">{</span> name<span class="token punctuation">,</span> desc<span class="token punctuation">,</span> params<span class="token punctuation">,</span> method<span class="token punctuation">,</span> path<span class="token punctuation">,</span> cache <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> headers <span class="token punctuation">}</span> <span class="token operator">=</span> api<span class="token punctuation">;</span>
+      <span class="token keyword">let</span> apiname <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>namespace<span class="token interpolation-punctuation punctuation">}</span></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>sep<span class="token interpolation-punctuation punctuation">}</span></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span> <span class="token comment">// 接口调用名称 this.$api['apiname']()</span>
+      <span class="token keyword">let</span> url <span class="token operator">=</span> path<span class="token punctuation">;</span> <span class="token comment">// 接口地址</span>
+      <span class="token keyword">const</span> baseURL <span class="token operator">=</span> mock <span class="token operator">?</span> mockBaseURL <span class="token punctuation">:</span> <span class="token constant">AXIOS_DEFAULT_CONFIG</span><span class="token punctuation">.</span>baseURL<span class="token punctuation">;</span> <span class="token comment">// 接口base地址</span>
+
+      debug <span class="token operator">&amp;&amp;</span> <span class="token function">assert</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> :接口name属性不能为空</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      debug <span class="token operator">&amp;&amp;</span>
+        <span class="token function">assert</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;/&quot;</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> :接口路径path，首字符应为/</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>api<span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>apiname<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        <span class="token function">value</span><span class="token punctuation">(</span><span class="token parameter">outerParams<span class="token punctuation">,</span> outerOptions</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// let _data = _isEmpty(outerParams) ? params : _pick(_assign({}, params, outerParams), Object.keys(params));</span>
+          <span class="token keyword">let</span> _data <span class="token operator">=</span>
+            <span class="token function">_isArray</span><span class="token punctuation">(</span>outerParams<span class="token punctuation">)</span> <span class="token operator">||</span> outerParams <span class="token keyword">instanceof</span> <span class="token class-name">FormData</span>
+              <span class="token operator">?</span> outerParams
+              <span class="token punctuation">:</span> <span class="token function">_merge</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> params<span class="token punctuation">,</span> outerParams<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+          <span class="token comment">/*特殊页面，需要对数据做处理*/</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>
+            <span class="token punctuation">(</span>method<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">&quot;POST&quot;</span> <span class="token operator">||</span>
+              method<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">&quot;PUT&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+            <span class="token punctuation">(</span><span class="token operator">!</span>headers <span class="token operator">||</span> <span class="token operator">!</span>headers<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span><span class="token string">&quot;Content-Type&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            _data <span class="token operator">=</span> Qs<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+
+          <span class="token keyword">return</span> <span class="token function">axios</span><span class="token punctuation">(</span>
+            <span class="token function">_normoalize</span><span class="token punctuation">(</span>
+              <span class="token function">_assign</span><span class="token punctuation">(</span>
+                <span class="token punctuation">{</span>
+                  name<span class="token punctuation">,</span>
+                  url<span class="token punctuation">,</span>
+                  desc<span class="token punctuation">,</span>
+                  baseURL<span class="token punctuation">,</span>
+                  method<span class="token punctuation">,</span>
+                  headers<span class="token punctuation">:</span> headers <span class="token operator">||</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+                  cache
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                outerOptions
+              <span class="token punctuation">)</span><span class="token punctuation">,</span>
+              _data
+            <span class="token punctuation">)</span>
+          <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+ * 根据请求类型处理axios参数
+ * @param options
+ * @param data
+ * @returns {*}
+ * @private
+ */</span>
+<span class="token keyword">function</span> <span class="token function">_normoalize</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">//处理IE下请求缓存</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>options<span class="token punctuation">.</span>cache<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    options<span class="token punctuation">.</span>url <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>options<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>
+      options<span class="token punctuation">.</span>url<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token string">&quot;?&quot;</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">&quot;&amp;&quot;</span> <span class="token punctuation">:</span> <span class="token string">&quot;?&quot;</span>
+    <span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">_=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>options<span class="token punctuation">.</span>method <span class="token operator">===</span> <span class="token string">&quot;POST&quot;</span> <span class="token operator">||</span> options<span class="token punctuation">.</span>method <span class="token operator">===</span> <span class="token string">&quot;PUT&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    options<span class="token punctuation">.</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>options<span class="token punctuation">.</span>method <span class="token operator">===</span> <span class="token string">&quot;GET&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    options<span class="token punctuation">.</span>params <span class="token operator">=</span> data<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> options<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+ * 导出接口
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Api</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  config<span class="token punctuation">:</span> <span class="token constant">API_CONFIG</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span><span class="token constant">API_DEFAULT_CONFIG</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">&quot;api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="_2、-使用-axios-接口拦截器"><a href="#_2、-使用-axios-接口拦截器" aria-hidden="true" class="header-anchor">#</a> 2、 使用 axios 接口拦截器</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">&quot;axios&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">AXIOS_DEFAULT_CONFIG</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@/config&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  requestSuccessFunc<span class="token punctuation">,</span>
+  requestFailFunc<span class="token punctuation">,</span>
+  responseSuccessFunc<span class="token punctuation">,</span>
+  responseFailFunc
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@/config/interceptor/axios&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> axiosInstance <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+axiosInstance <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token constant">AXIOS_DEFAULT_CONFIG</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 注入请求拦截</span>
+axiosInstance<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>requestSuccessFunc<span class="token punctuation">,</span> requestFailFunc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 注入返回拦截</span>
+axiosInstance<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>responseSuccessFunc<span class="token punctuation">,</span> responseFailFunc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> axiosInstance<span class="token punctuation">;</span>
+</code></pre></div><h3 id="_3、-接口通过一下方式配置"><a href="#_3、-接口通过一下方式配置" aria-hidden="true" class="header-anchor">#</a> 3、 接口通过一下方式配置</h3> <div class="language- extra-class"><pre class="language-text"><code>export default [
+  {
+    name: &quot;slide&quot;,
+    method: &quot;GET&quot;,
+    desc: &quot;轮播图&quot;,
+    path: &quot;/method/frappe.apis.apps.home.slides&quot;
+  }
+];
+</code></pre></div><h2 id="四小强之-redux-的封装"><a href="#四小强之-redux-的封装" aria-hidden="true" class="header-anchor">#</a> 四小强之 redux 的封装</h2> <p><img src="/blog/assets/img/5.1139008e.png" alt="5.png"></p> <h3 id="_1、reducer-的配置"><a href="#_1、reducer-的配置" aria-hidden="true" class="header-anchor">#</a> 1、reducer 的配置</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">const</span> <span class="token constant">DEFAULT_STATE</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  homeData<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  slideData<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  newsData<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  newListData<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  newDetailData<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  productGroupData<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  productData<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">USERDATA</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">state <span class="token operator">=</span> <span class="token constant">DEFAULT_STATE</span><span class="token punctuation">,</span> action <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> home<span class="token punctuation">.</span><span class="token constant">HOME_DATA</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> <span class="token operator">...</span>action<span class="token punctuation">.</span>payload <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> home<span class="token punctuation">.</span><span class="token constant">SLIDE_DATA</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> <span class="token operator">...</span>action<span class="token punctuation">.</span>payload <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> home<span class="token punctuation">.</span><span class="token constant">NEWS_DATA</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> <span class="token operator">...</span>action<span class="token punctuation">.</span>payload <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> home<span class="token punctuation">.</span><span class="token constant">NEW_LIST_DATA</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> <span class="token operator">...</span>action<span class="token punctuation">.</span>payload <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> home<span class="token punctuation">.</span><span class="token constant">NEW_DETAIL_DATA</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> <span class="token operator">...</span>action<span class="token punctuation">.</span>payload <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> home<span class="token punctuation">.</span><span class="token constant">PRODUCT_GROUP_DATA</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> <span class="token operator">...</span>action<span class="token punctuation">.</span>payload <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> home<span class="token punctuation">.</span><span class="token constant">PRODUCT_DATA</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>state<span class="token punctuation">,</span> <span class="token operator">...</span>action<span class="token punctuation">.</span>payload <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">default</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_2、actions-的配置"><a href="#_2、actions-的配置" aria-hidden="true" class="header-anchor">#</a> 2、actions 的配置</h3> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> $api <span class="token keyword">from</span> <span class="token string">&quot;@/plugins/api&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> doAction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./index&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">HOME_DATA</span> <span class="token operator">=</span> <span class="token string">&quot;HOME_DATA&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">NEW_DETAIL_DATA</span> <span class="token operator">=</span> <span class="token string">&quot;NEW_DETAIL_DATA&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">getHomeData</span> <span class="token operator">=</span> <span class="token parameter">params</span> <span class="token operator">=&gt;</span>
+  <span class="token function">doAction</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> <span class="token string">&quot;user/userInfo&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;HOME_DATA&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;homeData&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">getNewDetailData</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">params<span class="token punctuation">,</span> url</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+  <span class="token function">doAction</span><span class="token punctuation">(</span>
+    params<span class="token punctuation">,</span>
+    <span class="token string">&quot;home/newsDetail&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;NEW_DETAIL_DATA&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;newDetailData&quot;</span><span class="token punctuation">,</span>
+    <span class="token keyword">null</span><span class="token punctuation">,</span>
+    url
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>同时封装调用接口的逻辑 doAction</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">doAction</span><span class="token punctuation">(</span>
+  <span class="token parameter">params<span class="token punctuation">,</span>
+  url<span class="token punctuation">,</span>
+  dispatchType<span class="token punctuation">,</span>
+  stateData<span class="token punctuation">,</span>
+  model<span class="token punctuation">,</span>
+  replaceUrl</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;e&quot;</span><span class="token punctuation">,</span> params<span class="token punctuation">,</span> url<span class="token punctuation">,</span> dispatchType<span class="token punctuation">,</span> stateData<span class="token punctuation">,</span> model<span class="token punctuation">,</span> replaceUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token parameter">dispatch</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      $api<span class="token punctuation">[</span>url<span class="token punctuation">]</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> replaceUrl<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token keyword">let</span> newRes<span class="token punctuation">;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>model<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            newRes <span class="token operator">=</span> <span class="token function">model</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>display<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            newRes <span class="token operator">=</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>display<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token keyword">let</span> reducer <span class="token operator">=</span> <span class="token punctuation">{</span>
+            type<span class="token punctuation">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+            payload<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+          reducer<span class="token punctuation">.</span>type <span class="token operator">=</span> dispatchType<span class="token punctuation">;</span>
+
+          reducer<span class="token punctuation">.</span>payload<span class="token punctuation">[</span>stateData<span class="token punctuation">]</span> <span class="token operator">=</span> newRes<span class="token punctuation">;</span>
+
+          <span class="token function">dispatch</span><span class="token punctuation">(</span>reducer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token function">resolve</span><span class="token punctuation">(</span>newRes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">err</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token function">reject</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>中间加一层 model 层，处理后台不规范数据</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">serviceModel</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> data<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item<span class="token punctuation">,</span> index</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      title<span class="token punctuation">:</span> item<span class="token punctuation">.</span>plan_name <span class="token operator">||</span> item<span class="token punctuation">.</span>service_project_name<span class="token punctuation">,</span>
+      <span class="token operator">...</span>item
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">spDetailModel</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> tasks <span class="token operator">=</span> data<span class="token punctuation">.</span>tasks<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item<span class="token punctuation">,</span> index</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token operator">...</span>item<span class="token punctuation">,</span>
+      description<span class="token punctuation">:</span> item<span class="token punctuation">.</span>description <span class="token operator">||</span> <span class="token string">&quot;&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>data<span class="token punctuation">,</span>
+    tasks
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="四小强之公共方法的封装"><a href="#四小强之公共方法的封装" aria-hidden="true" class="header-anchor">#</a> 四小强之公共方法的封装</h2> <p><img src="/blog/assets/img/6.c98bef74.png" alt="6.png"></p> <ol><li>封装在 utils 文件夹中</li></ol></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.0d710046.js" defer></script><script src="/blog/assets/js/2.3724615d.js" defer></script><script src="/blog/assets/js/3.e00b5bcc.js" defer></script>
+  </body>
+</html>
