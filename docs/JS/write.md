@@ -180,3 +180,122 @@ Function.prototype.myBind = function(context) {
   };
 };
 ```
+
+### 手写 vue 发布订阅模式
+
+> vue 的发布订阅关键就是 dep 中设置全局属性 target，以此收集依赖
+
+先写一个发布者，vue 中是对数据的劫持，defineProperty 的 get 时调度中心收集依赖，set 时发送通知
+
+```javascript
+function observe(obj) {
+  if (!obj || typeof obj !== "object") {
+    return;
+  }
+  Object.keys(obj).forEach(key => {
+    defineReactive(obj, key, obj[key]);
+  });
+}
+
+function defineReactive(obj, key, val) {
+  let dep=new Dep()
+
+  observe(val);
+
+  Object.defineProperty(obj,key,{
+    get:function(){
+      if(Dep.target){
+         dep.addSub(Dep.target)
+      }
+
+      return val
+    }
+    set:function(newVal){
+      dep.notify()
+      val=newVal
+    }
+  })
+}
+```
+
+在写一个调度中心,主要指责是收集依赖和分发通知，所以必然有 add 和 notify 两个方法
+
+```javascript
+class Dep {
+  constructor() {
+    this.subs = [];
+  }
+  addSub(sub) {
+    this.subs.push(sub);
+  }
+  notify(sub) {
+    this.subs.forEach(sub => {
+      sub.update();
+    });
+  }
+}
+Dep.target = null;
+```
+
+实现一个订阅者
+
+```javascript
+class Watch {
+  constructor(obj, key, cb) {
+    Dep.target = this;
+    this.obj = obj;
+    this.key = key;
+    this.cb = cb;
+    this.val = obj[key];
+    Dep.target = null;
+  }
+  update() {
+    this.val = this.obj[this.key];
+    this.cb(this.val);
+  }
+}
+```
+
+手写一个 eventbus
+
+> vue 由于 data 数据的复杂性，需要递归监听每一个属性，因此有 observe，watch 类；而 eventbus 只需要实现调度中心，然后 emit 和 on 来执行就行了，订阅者其实是一堆存储的回调方法，而发布者其实就是 emit，发个通知，全局执行
+
+```javascript
+class EventEmitter {
+  constructor() {
+    this.handlers = {};
+  }
+
+  on(eventName, cb) {
+    if (!this.handlers[eventName]) {
+      this.handlers[eventName] = [];
+    }
+    this.handlers[eventName].push(cb);
+  }
+
+  emit(eventName, ...args) {
+    if (this.handlers[eventName]) {
+      this.handlers[eventName].forEach(cb => {
+        cb(...args);
+      });
+    }
+  }
+  // 移除某个事件回调队列里的指定回调函数
+  off(eventName, cb) {
+    const callbacks = this.handlers[eventName];
+    const index = callbacks.indexOf(cb);
+    if (index !== -1) {
+      // 浅拷贝
+      callbacks.splice(index, 1);
+    }
+  }
+  // 为事件注册单次监听器
+  once(eventName, cb) {
+    const Wrapper = (...args) => {
+      cb.apply(...args);
+      this.off(eventName, cb);
+    };
+    this.on(eventName, wrapper);
+  }
+}
+```
