@@ -181,6 +181,38 @@ Function.prototype.myBind = function(context) {
 };
 ```
 
+### 手写一个观察者
+
+> 观察者没有调度中心，发布者和订阅者直接通信
+
+```javascript
+class Publisher {
+  constructor() {
+    this.subs = [];
+  }
+  add(sub) {
+    this.subs.push(sub);
+  }
+  remove(sub) {
+    this.subs.forEach((item, i) => {
+      if (item === sub) {
+        this.subs.splice(i, 1);
+      }
+    });
+  }
+  notify() {
+    this.subs.forEach(sub => {
+      sub.update();
+    });
+  }
+}
+
+class Observe {
+  constructor() {}
+  update() {}
+}
+```
+
 ### 手写 vue 发布订阅模式
 
 > vue 的发布订阅关键就是 dep 中设置全局属性 target，以此收集依赖

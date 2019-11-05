@@ -6,7 +6,7 @@ module.exports = {
   themeConfig: {
     nav: [
       {
-        text: "JavaScript",
+        text: "JS基础",
         items: [
           { text: "JS之面向对象程序设计和继承", link: "/JS/object" },
           { text: "手写代码系列", link: "/JS/write" },
@@ -20,36 +20,32 @@ module.exports = {
       },
 
       {
-        text: "web框架",
+        text: "框架+App",
         items: [
-          { text: "vue基础知识", link: "/web/base" },
-          { text: "vuex基础", link: "/web/vuex" }
-        ]
-      },
-      {
-        text: "App开发",
-        items: [
+          { text: "vue基础知识", link: "/app/vue" },
+          { text: "vuex基础", link: "/app/vuex" },
           { text: "cordova基础", link: "/app/cordova" },
           { text: "vue+cordova思考", link: "/app/vueCordova" },
           { text: "ReactNative技术栈总结", link: "/app/RNSummary" },
           { text: "ReactNative知识点记录", link: "/app/RNRecord" },
-          { text: "flutter学习笔记", link: "/app/flutter_1" }
+          { text: "flutter学习笔记", link: "/app/flutter_1" },
+          { text: "小程序多端框架研究", link: "/app/uniapp" }
         ]
       },
+
       {
-        text: "小程序",
-        items: [{ text: "小程序多端框架研究", link: "/applets/uniapp" }]
-      },
-      {
-        text: "全栈",
+        text: "后端",
         items: [
           { text: "koa2+sequelize初探", link: "/Node/koa2" },
           { text: "全栈工程思考", link: "/Node/fullStack" }
         ]
       },
       {
-        text: "网络",
-        items: [{ text: "http协议总结", link: "/http/base" }]
+        text: "浏览器",
+        items: [
+          { text: "http协议总结", link: "/web/http" },
+          { text: "浏览器的执行顺序和结构", link: "/web/web_1" }
+        ]
       },
       {
         text: "构建",

@@ -145,38 +145,38 @@ eg: `docker pull ubuntu:14.04`
 
 ### 5. dockerfile 语法解析
 
-  ```javascript
+```javascript
 
-    // 尽量使用官方的image，确保安全
-    // 制作base image
-    FROM scratch
-    // 使用base image;
-    FROM centos
+  // 尽量使用官方的image，确保安全
+  // 制作base image
+  FROM scratch
+  // 使用base image;
+  FROM centos
 
-    // image的信息，类似与代码中的注释
-    LABEL maintainer
-    LABEL version
-    LABEL description
+  // image的信息，类似与代码中的注释
+  LABEL maintainer
+  LABEL version
+  LABEL description
 
-    // 每运行一个RUN，都会新生成一个layer,故建议通过&&和\将多个命令合并为一个
-    RUN
+  // 每运行一个RUN，都会新生成一个layer,故建议通过&&和\将多个命令合并为一个
+  RUN
 
-    // 设定当前工作目录，如果根目录下没有root，会自动创建，
-    // 使用workdir,不要用run cd ；尽量使用绝对目录
-    WORKDIR /root
+  // 设定当前工作目录，如果根目录下没有root，会自动创建，
+  // 使用workdir,不要用run cd ；尽量使用绝对目录
+  WORKDIR /root
 
-    // 将文件添加到指定目录
-    // ADD 还可以解压缩
-    // 大部分情况，copy优于ADD，添加远程文件/目录使用curl或者wget
-    ADD hello /   将hello添加到根目录
-    COPY
+  // 将文件添加到指定目录
+  // ADD 还可以解压缩
+  // 大部分情况，copy优于ADD，添加远程文件/目录使用curl或者wget
+  ADD hello /   将hello添加到根目录
+  COPY
 
-    // 设置常量，尽量使用，增加可维护性
-    ENV
+  // 设置常量，尽量使用，增加可维护性
+  ENV
 
-    // 存储和网络
-    VOLUME and EXPOSE
-  ```
+  // 存储和网络
+  VOLUME and EXPOSE
+```
 
 `RUN` 执行命令并创建新的 image layer
 
@@ -211,40 +211,40 @@ CMD[("echo", "hello docker")];
 ENTRYPOINT[("echo", "hello docker")];
 ```
 
-### 6. 将image发布到dockerhub
+### 6. 将 image 发布到 dockerhub
 
 - docker login
 - docker push imageName:tag
 
-
 ## docker network
 
 ### 端口映射
+
 `docker run --name web -d -p 80:80 nginx`
 
 --name: 容器命名
 -d:后台运行
--p:端口映射
+-p:端口映射 主机端口：容器端口
 
-## docker volumn数据持久化
+## docker volumn 数据持久化
 
-- 基于本地文件系统的volumn 
-  可以在执行docker create或docker run 时，通过-v参数将主机的目录作为容器的数据卷。
-- 基于plugin的volumn，支持第三方的存储方案，比如nas,aws
+- 基于本地文件系统的 volumn
+  可以在执行 docker create 或 docker run 时，通过-v 参数将主机的目录作为容器的数据卷。
+- 基于 plugin 的 volumn，支持第三方的存储方案，比如 nas,aws
 
-### volumn的类型
+### volumn 的类型
 
-- 受管理的data volumn，由docker后台自动创建。
-- 绑定挂载的volumn，具体挂载位置可以由用户指定。
+- 受管理的 data volumn，由 docker 后台自动创建。
+- 绑定挂载的 volumn，具体挂载位置可以由用户指定。
 
 ### 具体用法
 
-> dockerfile中：volume ['/var/lib/mysql']
+> dockerfile 中：volume ['/var/lib/mysql']
 
-1. `docker volumn ls` 查看volume
-2. `docker volumn inspect id` 查看指定volume
-3. `docker volumn rm id`  删除volume
-4. `docker run -d -v mysql:/var/lib/mysql --name mysql1 ` -v将/var/lib/mysql的volume命名为mysql
+1. `docker volumn ls` 查看 volume
+2. `docker volumn inspect id` 查看指定 volume
+3. `docker volumn rm id` 删除 volume
+4. `docker run -d -v mysql:/var/lib/mysql --name mysql1` -v 将/var/lib/mysql 的 volume 命名为 mysql
 
 ### bind mounting
 
@@ -252,18 +252,16 @@ ENTRYPOINT[("echo", "hello docker")];
 
 `docker run -d -v $(pwd):/usr/share/nginx/html -p 80:80 --name web 。。。`
 
-$(pwd)代表当前目录
+\$(pwd)代表当前目录
 
 ## docker-compose
 
-> 批处理多容器的app
+> 批处理多容器的 app
 
-- 是一个基于docker的命令行工具
-- 通过一个yml文件定义多容器的docker应用
-- 通过一条命令就可以根据yml文件的定义去创建或者管理多个容器
-- yml主要包括services,networks,volumes
-
-
+- 是一个基于 docker 的命令行工具
+- 通过一个 yml 文件定义多容器的 docker 应用
+- 通过一条命令就可以根据 yml 文件的定义去创建或者管理多个容器
+- yml 主要包括 services,networks,volumes
 
 ## 基础命令
 
@@ -277,13 +275,13 @@ $(pwd)代表当前目录
 
    `docker container rm id` 删除某一个容器
 
-3. `docker run/exec -it name /bin/bash ` 运行某一个容器并进入bash
+3. `docker run/exec -it name /bin/bash` 运行某一个容器并进入 bash
 
-4. `docker network inspect bridge`  看到对应容器的bridge
-    `ping ip`  ping通ip 
-    `telnet ip:duankou`  查看端口情况
-    `curl ip`  访问ip
-5. `docker-compose up -d` 根据命令行目录下的docker-compose.yml文件起项目，-d不打印日志并后台运行
+4. `docker network inspect bridge` 看到对应容器的 bridge
+   `ping ip` ping 通 ip
+   `telnet ip:duankou` 查看端口情况
+   `curl ip` 访问 ip
+5. `docker-compose up -d` 根据命令行目录下的 docker-compose.yml 文件起项目，-d 不打印日志并后台运行
 
 6. `docker-compose ps` 查看多个容器中的服务的情况
 
@@ -291,16 +289,13 @@ $(pwd)代表当前目录
 
 8. `docker-compose done` 关闭容器并删除容器
 
-9. `docker-compose images`  列出images
+9. `docker-compose images` 列出 images
 
-10. `docker-compose exec [container] bash` 进入容器的bash命令行
+10. `docker-compose exec [container] bash` 进入容器的 bash 命令行
 
 11. ``
-
-
 
 ## 配置 docker-compose.yml
 
 ```javascript
-
 ```
