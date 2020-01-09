@@ -206,9 +206,9 @@ ENTRYPOINT echo "hello docker"
 Exec 格式
 
 ```javascript
-RUN[("apt-get", "install", "-y", "vim")];
-CMD[("echo", "hello docker")];
-ENTRYPOINT[("echo", "hello docker")];
+RUN[('apt-get', 'install', '-y', 'vim')]
+CMD[('echo', 'hello docker')]
+ENTRYPOINT[('echo', 'hello docker')]
 ```
 
 ### 6. 将 image 发布到 dockerhub
@@ -293,7 +293,9 @@ ENTRYPOINT[("echo", "hello docker")];
 
 10. `docker-compose exec [container] bash` 进入容器的 bash 命令行
 
-11. ``
+11. `docker rmi $(docker images -q)` 删除所有镜像
+
+12. `docker stop/rm $(docker ps -aq)` 停止/删除所有容器
 
 ## 配置 docker-compose.yml
 
