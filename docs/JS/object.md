@@ -2,16 +2,16 @@
 
 ## 面向对象设计模式
 
-#### 创建对象——单个对象
+### 创建对象——单个对象
 
 - 字符字变量
 - new 操作符
-- 使用create
+- 使用 create
 
 ```javascript
 //字符自变量
-var a ={
-    name:"wang"
+var a = {
+  name: 'wang'
 }
 //使用new操作符,构造函数模式
 var b = new Object()
@@ -21,37 +21,35 @@ var b = new Object()
 var c = Object.create(Object.prototype)
 ```
 
+### 创建对象——多个对象
 
-
-#### 创建对象——多个对象
-
-##### 工厂模式
+#### 工厂模式
 
 > 创建对象的过程用一个函数包裹起来——创建多个相似对象
 
 ```javascript
-function createPerson(name,age){
-    var o = new Object()
-    o.name = name
-    o.age = age
-    o.sayName = function(){
-        alert(this.name)
-    }
-    return o
+function createPerson(name, age) {
+  var o = new Object()
+  o.name = name
+  o.age = age
+  o.sayName = function() {
+    alert(this.name)
+  }
+  return o
 }
-var person1 = createPerson(wang,18)
+var person1 = createPerson(wang, 18)
 ```
 
 优点：快速创建多个相似对象
 
 缺点：就是普通对象，无法识别对象的类型
 
-##### 构造函数模式
+#### 构造函数模式
 
 ```javascript
 function Person(name,age){
-    this.name = name 
-    this.age = age 
+    this.name = name
+    this.age = age
     this.sayName = ()=> {alert（this.name)}
 }
 var person1 = new Person(wang,18)
@@ -73,39 +71,41 @@ Person.call(o)
 
 优点：解决工厂模式缺点
 
-1. constructor，工厂模式创造的对象的construct是object，构造函数创建的对象的construct是该构造函数
-2. 将构造函数当做普通函数使用：这个时候的this指向了全局作用域
+1. constructor，工厂模式创造的对象的 construct 是 object，构造函数创建的对象的 construct 是该构造函数
+2. 将构造函数当做普通函数使用：这个时候的 this 指向了全局作用域
 
-缺点：对象的属性和方法都是独一无二的，占内存。如sayname等方法功能完全一样，却在每个对象上实例化
+缺点：对象的属性和方法都是独一无二的，占内存。如 sayname 等方法功能完全一样，却在每个对象上实例化
 
-##### 原型模式
+#### 原型模式
 
-> 每一个函数都有prototype，指向当前函数的原型对象
+> 每一个函数都有 prototype，指向当前函数的原型对象
 
 > 原型对象.constructor=当前函数
 
 > 函数.prototype = 原型对象
 
 ```javascript
-function Person(){
-    //空函数
+function Person() {
+  //空函数
 }
 Person.prototype.name = wang
 Person.prototype.age = 18
-Person.prototype.sayName = () => {alert (this.name)}
+Person.prototype.sayName = () => {
+  alert(this.name)
+}
 
-var person1 = new Person()    
-person1.sayName()    //wang
+var person1 = new Person()
+person1.sayName() //wang
 
-var person2 = new Person();
-person2.sayName()    //wang
+var person2 = new Person()
+person2.sayName() //wang
 
-alert(person1.sayName == person2.sayName)    //true
+alert(person1.sayName == person2.sayName) //true
 
-person1.__proto__      //实例对象的构造函数的原型对象
+person1.__proto__ //实例对象的构造函数的原型对象
 ```
 
-缺点：所有的实例都共用相同的属性和方法，person1和person2互相影响
+缺点：所有的实例都共用相同的属性和方法，person1 和 person2 互相影响
 
 1. 删除属性：delete person1.name；仅能删除自由属性，无法删除原型属性
 
@@ -114,28 +114,28 @@ person1.__proto__      //实例对象的构造函数的原型对象
 3. getPrototypeof——获得对象的原型
 
    ```javascript
-   var proto = Object.getPrototypeOf(Person)   //proto就是Person的原型对象
+   var proto = Object.getPrototypeOf(Person) //proto就是Person的原型对象
    ```
 
 4. hasOwnProperty——判断参数是否是对象上的自由属性
 
    ```javascript
    var obj = {
-       name:wang,
-       age:12
+     name: wang,
+     age: 12
    }
-   obj.hasOwnProperty("name")
+   obj.hasOwnProperty('name')
    ```
 
 5. for - in -——枚举对象上的所有属性（还会顺着原型链查找可枚举属性）
 
-6. Object.keys(对象)——返回一个数组（所有属性的name）
+6. Object.keys(对象)——返回一个数组（所有属性的 name）
 
 7. Object.getOwnPropertyNames()——返回一个数组，由指定对象的所有自身属性的属性名
 
-8. 自定义属性和方法都是可枚举的，Object的原型中所有方法不可枚举，constructor  es3可枚举，es5不可枚举
+8. 自定义属性和方法都是可枚举的，Object 的原型中所有方法不可枚举，constructor es3 可枚举，es5 不可枚举
 
-9. Person.prototype = {  }    将原型对象直接指向一个新对象，Person.prototype.constructor===Object，为了保险应该将Person.prototype.constructor=Person
+9. Person.prototype = { } 将原型对象直接指向一个新对象，Person.prototype.constructor===Object，为了保险应该将 Person.prototype.constructor=Person
 
    一般不建议如此做
 
@@ -146,7 +146,7 @@ person1.__proto__      //实例对象的构造函数的原型对象
        alert("hi")
    }
    friend.sayHi()      //"hi"    运行时先看自由属性，再看原型对象上的属性
-   
+
    function Person(){}
    var friend = new Person()    //此时已经定型，friend的只有sayHi的方法
    Person.prototype = {
@@ -156,36 +156,32 @@ person1.__proto__      //实例对象的构造函数的原型对象
    friend.sayName() 	//error		此时friend指向的还是原来的原型对象
    ```
 
-
-##### 组合模式
+#### 组合模式
 
 > 伪经典模式——构造函数+原型
 
 ```javascript
-function Person(name,age){
-    this.name = name 
-    this.age = age
+function Person(name, age) {
+  this.name = name
+  this.age = age
 }
-
 
 Person.prototype = {
-    constructor : Person,
-   	sayName : ()=>alert(this.name)
+  constructor: Person,
+  sayName: () => alert(this.name)
 }
 
-Person.prototype.sayName = ()=>alert(this.name)
+Person.prototype.sayName = () => alert(this.name)
 ```
 
 重点
 
 - 所有的函数上都有一个特殊的属性，prototype——原型对象，原型对象默认只有一个属性——constructor——指向构造函数
-- __proto__对象构造函数的原型对象
+- **proto**对象构造函数的原型对象
 
+## javascript 的继承
 
-
-## javascript的继承
-
-js中从技术上来讲并不存在继承，js是一个面向过程的语言，并不存在类（class），但是可以通过一些特殊的手段模拟继承
+js 中从技术上来讲并不存在继承，js 是一个面向过程的语言，并不存在类（class），但是可以通过一些特殊的手段模拟继承
 
 继承——
 
@@ -194,41 +190,37 @@ eg-1：玛丽，基类：跑，跳，吃金币，踩怪物；吃了不同的蘑�
 eg-2：
 
 ```javascript
-function Person(name,age){
-    this.name = name
-    this.age = age
+function Person(name, age) {
+  this.name = name
+  this.age = age
 }
-function Student(name,age,schoolNumber){
-    this.name = name 
-    this.age = age
-    this.schoolNumber
+function Student(name, age, schoolNumber) {
+  this.name = name
+  this.age = age
+  this.schoolNumber
 }
 ```
 
-
-
-##### 原型链
+#### 原型链
 
 > 本质是重写子类的原型对象
 
 ```javascript
-function SuperPerson(name){
-    this.name = name;
+function SuperPerson(name) {
+  this.name = name
 }
-SuperPerson.prototype.getName = ()=>{
-    return this.name
+SuperPerson.prototype.getName = () => {
+  return this.name
 }
-function Person(age){
-    this.age = age
+function Person(age) {
+  this.age = age
 }
 
 //继承   本质是重写子类的原型对象
-Person.prototype = new SuperPerson("wang")   //将子类的原型对象 = 父类的一个实例
+Person.prototype = new SuperPerson('wang') //将子类的原型对象 = 父类的一个实例
 
 var person1 = new Person(12)
-alert(person1.getName())    //wang
-
-
+alert(person1.getName()) //wang
 ```
 
 缺点：
@@ -238,26 +230,24 @@ alert(person1.getName())    //wang
 3. 不同实例互相影响，如下代码——当属性在父类的原型对象上时，是共享的
 4. 无法传递参数(最大的缺点)
 
-
-
 ```javascript
-function SuperType(){
-    this.colors = ["red"]
+function SuperType() {
+  this.colors = ['red']
 }
-function SonType(){}
+function SonType() {}
 
-SonType.prototype = new SuperType()    //继承，原型对象 = 父类实例
+SonType.prototype = new SuperType() //继承，原型对象 = 父类实例
 
 var color1 = new SonType()
 
-color1.colors.push("black")			//改变了原型对象，所有实例都会共享
+color1.colors.push('black') //改变了原型对象，所有实例都会共享
 
 var color2 = new SonType()
 
-alert(color2.colors)		//接收了改变后的值
+alert(color2.colors) //接收了改变后的值
 ```
 
-##### 借用构造函数
+#### 借用构造函数
 
 > 本质是父类的构造函数添加入子类中
 
@@ -267,38 +257,35 @@ alert(color2.colors)		//接收了改变后的值
 2. 可实现多继承
 3. 解决了共享问题
 
-- ###### 传递参数
+###### 传递参数
 
 ```javascript
-function SuperPerson(name){
-    this.name = name
+function SuperPerson(name) {
+  this.name = name
 }
-function SonPerson(name,age){
-    SuperPerson.call(this,name) 
-    this.age = age
+function SonPerson(name, age) {
+  SuperPerson.call(this, name)
+  this.age = age
 }
 
-var person1 = new SonPerson("wang",12)
+var person1 = new SonPerson('wang', 12)
 ```
 
-- ###### 互相不影响
+###### 互相不影响
 
 ```javascript
-function SuperType(){
-    this.colors = ['red']
+function SuperType() {
+  this.colors = ['red']
 }
-function SonType(){
-    SuperType.call(this)   //将父类的构造函数在子类中运行
+function SonType() {
+  SuperType.call(this) //将父类的构造函数在子类中运行
 }
 
 var color1 = new SonType()
-color1.colors.push("black")
+color1.colors.push('black')
 var color2 = new SonType()
-alert(color2.colors)       //'red'
-
+alert(color2.colors) //'red'
 ```
-
-
 
 缺点：
 
@@ -307,69 +294,67 @@ alert(color2.colors)       //'red'
 3. 只能继承构造函数中的属性和方法，不能继承原型上的属性和方法
 4. 无法复用，创造出来的每一个对象的属性和方法都是独一无二的
 
-##### 组合式继承
+#### 组合式继承
 
 > 借用构造函数写属性,原型链写公共方法
 
 ```javascript
-function Father(name){
-    this.name = name     //构造函数写属性
+function Father(name) {
+  this.name = name //构造函数写属性
 }
 
-Father.prototype.sayName = function(){
-    alert(this.name)      //原型对象上写方法
+Father.prototype.sayName = function() {
+  alert(this.name) //原型对象上写方法
 }
 
-function Son(name,age){
-    SuperType.call(this,name)	 //继承父类构造函数中的属性
-    this.age = age
+function Son(name, age) {
+  SuperType.call(this, name) //继承父类构造函数中的属性
+  this.age = age
 }
-Son.prototype = new Father()      //重写子类的原型对象
-Son.prototype.constructor = Son   //将子类原型对象的构造函数指向子类本身
+Son.prototype = new Father() //重写子类的原型对象
+Son.prototype.constructor = Son //将子类原型对象的构造函数指向子类本身
 
-Son.prototype.sayAge = function(){    //再给子类原型对象添加事件
-    alert(this.age)
+Son.prototype.sayAge = function() {
+  //再给子类原型对象添加事件
+  alert(this.age)
 }
 
-var tt = new Son("wang",12)
-
+var tt = new Son('wang', 12)
 ```
 
 优点：结合了前两种模式的优点，避免了其缺点，伪经典模式
 
 缺点：
 
-1. 父类的构造函数被调用两次，call/new 
+1. 父类的构造函数被调用两次，call/new
 2. 同名覆盖，属性在原型和实例上各占一份，占用多余内存
 
-##### 原型式继承
+#### 原型式继承
 
 ```javascript
 var a = {
-    name:"wang"
+  name: 'wang'
 }
 var b = {
-    age:12
+  age: 12
 }
 b.__proto__ = a
 //__proto__  在IE中支持不好
 
-
-
 //创造一个跳板
-function F(){}
-F.prototype = a 
+function F() {}
+F.prototype = a
 var c = new F()
 
 //原型式继承
-function object(o){
-    function F(){}
-    F.prototype = o
-    return new F()
+function object(o) {
+  function F() {}
+  F.prototype = o
+  return new F()
 }
 
 //写法二
-Object.create(prototype, descriptors)  //es5
+Object.create(prototype, descriptors) //es5
 //创建一个空函数
 //让空函数的protetype==继承的对象
 //使用new 操作符
@@ -377,24 +362,24 @@ Object.create(prototype, descriptors)  //es5
 
 缺点：看起来不像继承
 
-##### 寄生式继承
+#### 寄生式继承
 
 > 本质等同于原型式继承
 
-##### 完美继承——组合寄生式继承
+#### 完美继承——组合寄生式继承
 
 > 解决组合式继承的两个问题
 
 ```javascript
-function Father(name){
-    this.name = name
+function Father(name) {
+  this.name = name
 }
-Father.prototype.sayName = function(){
-    alert(this.name)
+Father.prototype.sayName = function() {
+  alert(this.name)
 }
-function Son(name,age){
-    Father.call(this,name)        //父类构造函数仅运行了一次
-    this.age = age
+function Son(name, age) {
+  Father.call(this, name) //父类构造函数仅运行了一次
+  this.age = age
 }
 
 var p = Object.create(Father.prototype)
@@ -404,34 +389,32 @@ p.constructor = Son
 Son.prototype = p
 ```
 
-
-
-### ES6的class
+### ES6 的 class
 
 ```javascript
 //父类
 class Person {
-    constructor(name) {
-        this.name = name;
-    }
-    say () {
-        console.log("say hi");
-      
-    }
-};
+  constructor(name) {
+    this.name = name
+  }
+  say() {
+    console.log('say hi')
+  }
+}
 //子类
 class SMan extends Person {
-    constructor (name, age) {     //指向构造函数本身
-        super(name);				//先运行父类的构造函数	this.name=name
-        this.age = age;
-    }
-    show () {
-        console.log(this.age);
-    }
+  constructor(name, age) {
+    //指向构造函数本身
+    super(name) //先运行父类的构造函数	this.name=name
+    this.age = age
+  }
+  show() {
+    console.log(this.age)
+  }
 }
 
-var eg = new SMan("wang",12)
-eg.show();
+var eg = new SMan('wang', 12)
+eg.show()
 eg.say()
 ```
 
@@ -442,7 +425,7 @@ eg.say()
 ### new 操作符的四个步骤
 
 - 创建一个对象
-- 将构造函数的this指向新创建的对象
+- 将构造函数的 this 指向新创建的对象
 - 实行函数里的所有代码
 - 将创建的对象返回
 
@@ -450,30 +433,30 @@ eg.say()
 
 区别点：
 
-- 没有显示创建对象，没有显式的return
+- 没有显示创建对象，没有显式的 return
 - 构造函数的第一个字母大写（约定俗成）
 - con
 
-### this的指向分类——都是指向对象
+### this 的指向分类——都是指向对象
 
 - 纯函数的调用——全局作用域（window）
 - 作为对象的方法和属性调用——指向对象
 - 作为构造函数调用——创建出来的新对象
 - apply/call——强制指向一个对象
 
-不确定this指向时，一般console.log(this)或打断点
+不确定 this 指向时，一般 console.log(this)或打断点
 
 ### 深拷贝和浅拷贝——最简单的继承
 
 > 继承就是把别人的属性拿过来，最简单的方法就是复制一份
 
-JS五种基础类型，一种引用类型
+JS 五种基础类型，一种引用类型
 
-##### 浅拷贝
+#### 浅拷贝
 
 遍历复制一份
 
-##### 深拷贝
+#### 深拷贝
 
 遍历递归复制一份
 
@@ -486,9 +469,9 @@ var b = a
 
 //浅拷贝
 //此递归方法不包含数组对象
-var a = { 
-    a:1, 
-    arr: [2,3] 
+var a = {
+    a:1,
+    arr: [2,3]
 }
 var b = shallowCopy(a)
 
@@ -503,8 +486,8 @@ function shallowCopy(obj) {
 }
 
 //深拷贝
-var a = { 
-    a:1, 
+var a = {
+    a:1,
     arr: [1,2]，
     nation : '中国',
     birthplaces:['北京','上海','广州']
@@ -538,12 +521,3 @@ function deepCopy(o,c){
 
 
 ```
-
-
-
-
-
-
-
-
-

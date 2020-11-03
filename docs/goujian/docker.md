@@ -275,6 +275,8 @@ ENTRYPOINT[('echo', 'hello docker')]
 
    `docker container rm id` 删除某一个容器
 
+   `docker container prune` 删除关闭了的容器
+
 3. `docker run/exec -it name /bin/bash` 运行某一个容器并进入 bash
 
 4. `docker network inspect bridge` 看到对应容器的 bridge
@@ -301,3 +303,37 @@ ENTRYPOINT[('echo', 'hello docker')]
 
 ```javascript
 ```
+
+## mongo
+
+### 身份认证：
+
+MongoDB 安装完成后，默认是没有权限验证的，默认是不需要输入用户名密码即可登录的，但是往往数据库方面我们会出于安全性的考虑而设置用户名密码。
+即任何客户端都可以使用 mongo IP:27017/admin 命令登录 mongo 服务
+启用访问控制前，请确保在 admin 数据库中拥有 userAdmin 或 userAdminAnyDatabase 角色的用户。
+该用户可以管理用户和角色，例如：创建用户，授予或撤销用户角色，以及创建或修改定义角色。
+启用验证的方式：
+
+1. /etc/mongodb.conf //将 auth=true 前面的注释拿掉，然后重启服务生效。
+2. 2.线上生产环境使用的是 docker:
+   a. 需要在 config 和 shard 服务的启动命令中加上“--auth”参数。
+   b. 需要在宿主机生成一个 keyfile 文件：openssl rand -base64 755 > mongo.key，
+   分别放在 mongos、config 和 shard 目录中，并修改目录权限：chown -R 999:999 mongos 和 keyfile 权限：chmod 600 mongos/mongo.key
+   c. 在 config 和 shard 和 mongos 服务启动命令中添加“--keyFile /data/db/mongo.key”参数。
+
+### 用户权限：
+
+一，掌握权限，理解下面 4 条基本上就差不多
+
+1. mongodb 是没有默认管理员账号，所以要先添加管理员账号，在开启权限认证。
+2. 切换到 admin 数据库，添加的账号才是管理员账号。
+3. 用户只能在用户所在数据库登录，包括管理员账号。
+4. mongo 的用户是以数据库为单位来建立的，每个数据库有自己的管理员。
+5. 管理员可以管理所有数据库，但是不能直接管理其他数据库，要先在 admin 数据库认证后才可以。
+   注：帐号是跟着库走的，所以在指定库里授权，必须也在指定库里验证
+
+`db.createUser({user: "admin",pwd: "123456",roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]})`
+
+`db.createUser({user: "root",pwd: "123456",roles: [ { role: "root", db: "admin" } ]})`
+
+`db.createUser({user: "position",pwd: "123456",roles: [ { role: "dbOwner", db: "position" } ]})`

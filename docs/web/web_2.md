@@ -60,3 +60,124 @@ eg: dom 节点的监控；
 - 微任务和宏任务是绑定的，每个宏任务执行时，会创建自己的微任务队列
 - 微任务的执行时长会影响到当前宏任务的时长。
 - 在一个宏任务中，分别创建一个用于回调的宏任务和微任务，无论什么情况，微任务都早于宏任务执行
+
+### Promise
+
+> 单线程架构决定了 web 页面的异步回调，而多次回调会导致代码的逻辑不连贯、不线性。Promise 封装异步代码，让处理流程变得线性
+
+![3.jpeg](./image/64.png)
+
+我们来看一下 Promise 的常用用法
+
+```javascript
+let b = function(resolve, reject) {
+  let xhr = new XMLHttpRequest()
+  xhr.open('get', 'url', true)
+  xhr.ontimeout = function(e) {
+    reject(e)
+  }
+
+  xhr.onreadystatechange = function() {
+    resolve(this.responseText, this)
+  }
+}
+let a = new Promise(b)
+
+a.then(res => {}).catch(e => {})
+```
+
+观察上面代码，可以发现：
+
+- 构建 Promise 对象时，需要传入一个 b 函数，业务流程都在 b 函数中执行
+- 如果运行 b 函数中的业务执行成功了，会调用 resolve 函数；如果执行失败，则调用 reject 函数
+- 在 b 函数中调用 resolve 函数时，会触发 Promise.then 中设置的回调函数;调用 reject 函数时，会触发 Promise.catch 设置的回调函数
+
+**首先，Promise 实现了回调函数的延时绑定**
+其在代码上的提现就是先创建了 Promise，执行业务逻辑；再使用 then 来设置回调函数。resolve 函数会触发设置的回调函数
+
+```javascript
+function b(resolve, reject) {
+  resolve(100)
+}
+let a = new Promise(b)
+
+function onResolve(value) {
+  console.log(value)
+}
+
+a.then(onResolve)
+```
+
+**其次，需要将回调函数 onResolve 的返回值穿透到最外层**
+
+```javascript
+function resolve(value) {
+  let a2 = new Promise((resolve, reject) => {
+    resolve(value)
+  })
+  return a2 //then的返回值也是一个promise
+}
+```
+
+这样就可以实现透传：a.then().then(value);实现透传之后，Promise 对象的错误就具有冒泡性质，会一直向后传递，知道被 catch
+
+**我们来实现一个简易版 Promise**
+
+```javascript
+const PENDING = 'pending'
+const RESOLVED = 'resolved'
+const REJECTED = 'rejected'
+
+function MyPromise(fn) {
+  this.state = PENDING
+  this.value = null
+  this.resolveCallbacks = []
+  this.rejectCallbacks = []
+  const that = this
+
+  function resolve() {
+    //   这个地方实际用的是微任务，目的是让then中的回调先执行
+    setTimeout(function() {
+      if (that.state === PENDING) {
+        that.resolveCallbacks.forEach(item => {
+          item(that.value)
+        })
+      }
+    }, 0)
+  }
+
+  function reject() {
+    同上
+  }
+
+  try {
+    fn(resolve, reject)
+  } catch (e) {}
+}
+
+// 简易版
+
+MyPromise.prototype.then = function(cb) {
+  const that = this
+  //   简易的透传，cb不存在时
+  cb = typeof cb === 'function' ? cb : v => v
+  if (that.state === PENDING) {
+    that.resolvedCallbacks.push(cb)
+  }
+  if (that.state === RESOLVED) {
+    cb(that.value)
+  }
+}
+// then函数返回Promise
+MyPromise.prototype.then = function(cb) {
+  const that = this
+  if ((that.state = PENDING)) {
+    return new MyPromise((resolve, reject) => {
+      that.resolvedCallbacks.push(() => {
+        const x = cb(that.value) //此时执行了then1的回调
+        resolve(x) //返回上一步的返回值
+      })
+    })
+  }
+}
+```
