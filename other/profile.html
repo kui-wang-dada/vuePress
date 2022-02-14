@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>profile.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/kuiwang/Project/small/vuePress/other/markdown-pdf.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF">个人信息</h2>
+<img src="./profile1.jpeg"  height="200px" width="130px" style="position:absolute;right:20px;border-radius:5px;object-fit:cover">
+<ul>
+<li>王逵 / 男 / 出生 1991 / 13100671550 / 872505550@qq.com</li>
+<li>本科 / 华中农业大学 / 动物医学 / 从事 web 大前端年限：5 年多</li>
+<li>个人网站： <a href="www.dadafastrun.com">www.dadafastrun.com</a></li>
+<li>微信公众号：前端自学社区联盟</li>
+<li>GitHub：<a href="http://github.com/wangkui1991">http://github.com/wangkui1991</a></li>
+<li>职位期望：Web 前端工程师 / 税前月薪 18-25k / 武汉</li>
+</ul>
+<h2 id="%E5%B7%A5%E4%BD%9C%E7%BB%8F%E5%8E%86">工作经历</h2>
+<h3 id="%E5%8E%9A%E4%BB%81%E6%95%99%E8%82%B2%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B82019-%E5%B9%B4-3-%E6%9C%88%E8%87%B3%E4%BB%8A">厚仁教育有限公司（2019 年 3 月～至今）</h3>
+<blockquote>
+<p>前端负责人，网站集群负责人，小程序生态负责人，app 项目负责人：探讨需求无 ui 实现项目</p>
+</blockquote>
+<ol>
+<li>app 开发。 负责：前端独立开发，项目流程控制； 技术栈：cordova1.0，RN2.0，flutter3.0(正在策划)； 攻克难点： 业务对接 / 需求归纳整理 / 架构设计 / 更新策略 / 消息推送 / 测试发布 / 数据埋点 / 微信和指纹登录 / 国际化等</li>
+<li>网站 重构企业各部门对外网站。 负责：对接市场，确定需求，独立开发实现； 技术栈：nuxt 服务端渲染 / spa+vue； 攻克难点：业务对接 / 需求整理 / 代码实现 / seo 优化</li>
+<li>网站 企业 erp 管理后台。 负责：fits 管理平台前端实现。 技术栈：react+procomponent+formily+lerna；攻克难点：antdesign 及其周边熟练应用 / 项目分包管理 / formily schema</li>
+<li>小程序集群。 负责：探讨需求+前端独立开发； 技术栈：主 Taro 兼 Uniapp； 攻克难点：微信功能对接 / 各平台兼容</li>
+</ol>
+<h3 id="%E7%A7%91%E5%A4%A7%E8%AE%AF%E9%A3%9E%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B82018-%E5%B9%B4-4-%E6%9C%88-2019-%E5%B9%B4-3-%E6%9C%88">科大讯飞有限公司（2018 年 4 月～ 2019 年 3 月）</h3>
+<blockquote>
+<p>前期单个项目维护，后期泉山项目群负责人：+项目广度，+Vue 深入理解，+前端小组工作管理</p>
+</blockquote>
+<ol>
+<li>NW 桌面程序。 负责：已有项目添加新需求+前端独立开发； 技术栈：nw+node； 难点： 熟悉 nw 的 api</li>
+<li>Egret 阿尔法蛋小游戏。 负责：已有项目添加新需求； 技术栈：Egret+Ts； 难点：熟悉 Egret api 和动画逻辑</li>
+<li>泉山教师成长档案。 负责：前端负责人； 工期：一周设计/两周开发/两周提测； 技术栈： Vue 全家桶 / 权限路由 / Echarts 地图</li>
+</ol>
+<h3 id="%E6%82%A0%E7%84%B6%E4%B8%80%E6%8C%87%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B82017-%E5%B9%B4-3-%E6%9C%88-2018-%E5%B9%B4-4-%E6%9C%88%E4%BA%91%E9%87%8C%E6%9C%8D%E5%8A%A1%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B82016-%E5%B9%B4-10-%E6%9C%88-2017-%E5%B9%B4-3-%E6%9C%88">悠然一指有限公司（2017 年 3 月～ 2018 年 4 月）云里服务有限公司（2016 年 10 月～ 2017 年 3 月）</h3>
+<blockquote>
+<p>入门，负责单个模块：+RN，+JS，+Vue，+前端基础</p>
+</blockquote>
+<ol>
+<li>APP 悠然一指 / 圈乎。技术栈：ReactNative 负责：首页+文章详情页+评论点赞收藏； 难点：嵌套 tab / 首屏体验 / ui 组件的封装</li>
+<li>h5+静态 页面。技术栈：vue； 负责：输出 ui 页面；</li>
+<li>微信小程序。 技术栈：微信原生 负责：小程序页面编写；</li>
+</ol>
+<h3 id="%E8%87%AA%E5%AD%A6%E7%9B%B8%E5%85%B3">自学相关</h3>
+<ol>
+<li>微信公众号小程序 / node 后台 / graphql+mongodb 数据库：具体可关注公众号“前端自学社区联盟”查看详情</li>
+<li>node+vue+element 搭建简单 crud 后台系统</li>
+<li>docker + node 搭建个人网站</li>
+</ol>
+
+</body>
+</html>
