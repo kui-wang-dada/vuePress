@@ -13,11 +13,11 @@
 
 ### 厚仁教育有限公司（2019 年 3 月～至今）
 
-> 前端负责人，网站集群负责人，小程序生态负责人，app 项目负责人：探讨需求无 ui 实现项目
+> 前端负责人，独立开发。熟悉技术栈：react(reactnative,taro,next),vue(nuxt,uniapp),flutter，cordova 等
 
-1. app 开发。 负责：前端独立开发，项目流程控制； 技术栈：cordova1.0，RN2.0，flutter3.0(正在策划)； 攻克难点： 业务对接 / 需求归纳整理 / 架构设计 / 更新策略 / 消息推送 / 测试发布 / 数据埋点 / 微信和指纹登录 / 国际化等
-2. 网站 重构企业各部门对外网站。 负责：对接市场，确定需求，独立开发实现； 技术栈：nuxt 服务端渲染 / spa+vue； 攻克难点：业务对接 / 需求整理 / 代码实现 / seo 优化
-3. 网站 企业 erp 管理后台。 负责：fits 管理平台前端实现。 技术栈：react+procomponent+formily+lerna；攻克难点：antdesign 及其周边熟练应用 / 项目分包管理 / formily schema
+1. app 开发。 负责：前端独立开发，项目流程控制； 技术栈：cordova1.0，ReactNative2.0，flutter3.0(正在策划)； 攻克难点： 业务对接 / 需求归纳整理 / 架构设计 / 更新策略 / 消息推送 / 测试发布 / 数据埋点 / 微信和指纹登录 / 国际化等
+2. C 端网站 重构企业各部门对外网站。 负责：对接市场，确定需求，独立开发实现； 技术栈：nuxt 服务端渲染 / spa+vue； 攻克难点：seo 优化 / 组件封装
+3. erp 企业管理系统。 负责：fits 平台前端实现。 技术栈：react+procomponent+formily+lerna；攻克难点：antdesign 及其周边熟练应用 / 项目分包管理 / formily schema 运用
 4. 小程序集群。 负责：探讨需求+前端独立开发； 技术栈：主 Taro 兼 Uniapp； 攻克难点：微信功能对接 / 各平台兼容
 
 ### 科大讯飞有限公司（2018 年 4 月～ 2019 年 3 月）
@@ -38,6 +38,7 @@
 
 ### 自学相关
 
-1. 微信公众号小程序 / node 后台 / graphql+mongodb 数据库：具体可关注公众号“前端自学社区联盟”查看详情
-2. node+vue+element 搭建简单 crud 后台系统
-3. docker + node 搭建个人网站
+1. node+nuxt 开发微信公众号后台
+2. golang+react+antd 构建后台管理系统
+3. java sprint boot 构建办公小程序
+4. docker 容器部署+服务器上线
