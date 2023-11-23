@@ -17,12 +17,13 @@
 
 ## 工作经历
 
-### 区块链公司 （2022 年 3 月～ 2022 年 7 月）
+### 区块链公司 （2022 年 3 月～ 2023 年 4 月）
 
 > 前端负责人，技术栈：web3+react
 
-1. Sio2 前端。负责：模仿 aave,starlay 独立开发前端；难点：智能合约 abi 集成，合约中间件，web3 连接。线上地址：https://shibuya.sio2.finance
-2. 协助开发 Astriddao 前端，负责：stake 逻辑，移动端响应式； 线上地址：https://app.astriddao.xyz/
+1. noname / bluez 前端负责人。线上地址：https://noname.master   https://bluez.app
+2. Sio2 前端。负责：模仿 aave,starlay 独立开发前端；难点：智能合约 abi 集成，合约中间件，web3 连接。线上地址：https://shibuya.sio2.finance
+3. 协助开发 Astriddao 前端，负责：stake 逻辑，移动端响应式； 线上地址：https://app.astriddao.xyz/
 
 ### 厚仁教育有限公司（2019 年 3 月～ 2022 年 3 月）
 
@@ -45,12 +46,11 @@
 
 > 入门，负责单个模块：+RN，+JS，+Vue，+前端基础
 
-1. APP 悠然一指 / 圈乎。技术栈：ReactNative 负责：首页+文章详情页+评论点赞收藏； 难点：嵌套 tab / 首屏体验 / ui 组件的封装
+1. APP 悠然一指 / 圈乎。技术栈：ReactNative； 难点：嵌套 tab / 首屏体验 / ui 组件的封装
 2. h5+静态 页面。技术栈：vue； 负责：输出 ui 页面；
-3. 微信小程序。 技术栈：微信原生 负责：小程序页面编写；
 
 ### 自学相关
 
 1. node+nuxt 开发微信公众号后台
 2. golang+react+antd 构建后台管理系统
-3. docker 容器部署+服务器上线
+3. docker / nginx 容器部署+服务器上线

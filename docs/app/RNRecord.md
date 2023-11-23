@@ -167,10 +167,11 @@ const AppContainer = createAppContainer(AppNavigator);
 4. 使用工具将 ttf 文件生成对应的 json 文件
 
 5. ios：将 ttf 文件引入 build phase 的 link 中
+6. ios: 在 build phase 中选择 copy bundle,将 iconfont.ttf 引入
 
-6. ios: 在 info 中添加 iconfont.ttf 信息
+7. ios: 在 info 中添加 iconfont.ttf 信息
 
-7. android: 在 app/build 中添加以下代码
+8. android: 在 app/build 中添加以下代码
 
 ```javascript
 project.ext.vectoricons = [
@@ -200,10 +201,7 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 let { refresh } = this.state;
 return (
   <Root>
-    <AppNavigator
-      onNavigationStateChange={this.onNavigationStateChange}
-      screenProps={{ refresh }}
-    />
+    <AppNavigator onNavigationStateChange={this.onNavigationStateChange} screenProps={{ refresh }} />
   </Root>
 );
 ```
@@ -213,17 +211,12 @@ return (
 2. 底部 tabbar 在页面渲染之前就生成了，故上述一对 tabbar 无效
 
 ```javascript
-<AppNavigator
-  onNavigationStateChange={this.onNavigationStateChange}
-  screenProps={{ refresh, tabLabel }}
-/>;
+<AppNavigator onNavigationStateChange={this.onNavigationStateChange} screenProps={{ refresh, tabLabel }} />;
 
 navigationOptions: ({ screenProps }) => ({
   tabBarLabel: screenProps.tabLabel.home,
-  tabBarIcon: ({ tintColor, focused }) => (
-    <Icon name={focused ? "home2" : "home1"} size={25} color={tintColor} />
-  ),
-  header: null
+  tabBarIcon: ({ tintColor, focused }) => <Icon name={focused ? "home2" : "home1"} size={25} color={tintColor} />,
+  header: null,
 });
 ```
 
